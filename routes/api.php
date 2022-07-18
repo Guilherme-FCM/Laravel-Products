@@ -17,3 +17,18 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/products', function(Request $request){
+    return [
+        [
+            'name' => 'smartphone',
+            'price' => 3000,
+            'brand' => 'Samsung'
+        ],
+        [
+            'name' => 'laptop',
+            'price' => 4500,
+            'brand' => 'Dell'
+        ]
+    ];
+});

@@ -12,9 +12,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Product::all();
+        return Product::where('name', 'like', '%'.$request->query('name').'%')->get();
     }
 
     /**

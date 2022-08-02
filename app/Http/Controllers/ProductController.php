@@ -14,18 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return [
-            [
-                'name' => 'smartphone',
-                'price' => 3000,
-                'brand' => 'Samsung'
-            ],
-            [
-                'name' => 'laptop',
-                'price' => 4500,
-                'brand' => 'Dell'
-            ]
-        ];
+        return Product::all();
     }
 
     /**

@@ -23,13 +23,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::resource('products', ProductController::class)
     ->only(['index', 'show']);
-    
+
 Route::resource('products', ProductController::class)
     ->only(['store', 'update', 'destroy'])
     ->middleware('auth:sanctum');
 
 Route::prefix('auth')->group(function(){
-    Route::post('login', [ LoginController::class, 'login' ]);
-    Route::post('logout', [ LoginController::class, 'logout' ]);
     Route::post('register', [ RegisterController::class, 'register' ]);
+    Route::post('login', [ LoginController::class, 'login' ]);
+    Route::middleware('auth:sanctum')->post('logout', [ LoginController::class, 'logout' ]);
 });

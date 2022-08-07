@@ -9,14 +9,20 @@ use Illuminate\Http\Request;
 class RegisterController extends Controller
 {
     public function register(Request $request, User $user){
-        $userData = $request->only('name', 'email', 'password');
+        $userData = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string'
+        ]);
 
-        $user = $user->create($userData);
+        $user = User::create($userData);
         if (! $user)
             abort(500, 'Error to create a user');
 
+        $token = $user->createToken($user->name);
         return response()->json([
-            'user' => $user
+            'user' => $user,
+            'token' => $token->plainTextToken
         ]);
     }
 }

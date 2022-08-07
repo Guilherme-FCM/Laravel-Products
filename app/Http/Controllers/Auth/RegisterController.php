@@ -15,11 +15,8 @@ class RegisterController extends Controller
         if (! $user)
             abort(500, 'Error to create a user');
 
-        $token = $request->user()->createToken();
-
         return response()->json([
-            'user' => $user,
-            'token' => $token->plainTextToken
+            'user' => $user
         ]);
     }
 }
